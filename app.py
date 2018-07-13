@@ -214,6 +214,8 @@ input_leadtime_max = 140
 
 # Setup the app
 app = dash.Dash('SPOdashboard')
+server = app.server
+# wsgi_app = app.wsgi_app
 
 # Boostrap CSS.
 app.css.append_css({'external_url': 'https://cdn.rawgit.com/plotly/dash-app-stylesheets/2d266c578d2a6e8850ebce48fdb52759b2aef506/stylesheet-oil-and-gas.css'})  # noqa: E501
@@ -532,3 +534,15 @@ app.config['suppress_callback_exceptions']=True
 
 if __name__ == '__main__':
     app.run_server(debug=True)
+# def wsgi_app(environ, start_response):
+#     status = '200 OK'
+#     response_headers = [('Content-type', 'text/plain')]
+#     start_response(status, response_headers)
+#     response_body = app.layout
+#     yield response_body.encode()
+#
+# if __name__ == '__main__':
+#     from wsgiref.simple_server import make_server
+#
+#     httpd = make_server('localhost', 5555, wsgi_app)
+#     httpd.serve_forever()
